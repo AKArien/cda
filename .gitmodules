@@ -2,6 +2,3 @@
 	path = database/Versioning
 	url = https://gitlab.com/depesz/Versioning.git
 
-[submodule "database/Versionning"]
-	path = database/Versionning
-	url = https://gitlab.com/depesz/Versioning.git
