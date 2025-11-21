@@ -26,14 +26,23 @@ RUN make install
 ## pgcrytpo is already available
 
 ## pgjwt
+WORKDIR /pgjwt-src
+RUN git clone https://github.com/michelp/pgjwt.git
+WORKDIR /pgjwt-src/pgjwt
+RUN make install
 
 # clean up unneeded stuff that weigh the image down
 RUN apt-get remove postgresql-server-dev-17 git cmake -y
 RUN rm -r /var/lib/apt/lists/*
-RUN rm -rf /timescaledb-src
+RUN rm -r /timescaledb-src
+RUN rm -r /pgjwt-src
 
 # code
 COPY database /src
+WORKDIR /src
 
-# before running the normal entrypoint, tune timescaledb
+# import config
+RUN mv /src/postgresql.conf /var/lib/postgresql/data/postgresql.conf
+
+# before running the normal entrypoint, tune timescaledb for the host
 # CMD timescaledb-tune --yes && docker-entrypoint.sh
