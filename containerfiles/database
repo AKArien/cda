@@ -37,12 +37,7 @@ RUN rm -r /var/lib/apt/lists/*
 RUN rm -r /timescaledb-src
 RUN rm -r /pgjwt-src
 
-# code
-COPY database /src
 WORKDIR /src
-
-# import config
-RUN mv /src/postgresql.conf /var/lib/postgresql/data/postgresql.conf
 
 # before running the normal entrypoint, tune timescaledb for the host
 # CMD timescaledb-tune --yes && docker-entrypoint.sh
