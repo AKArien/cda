@@ -27,7 +27,9 @@ services:
       - 3000:3000
     environment:
       PGRST_JWT_SECRET: ${REST_JWT_SECRET}
-    
+      PGRST_DB_URI: "postgres://postgres:${DB_PASS}@postgres:5432/postgres"
+
+   
     volumes:
       - ${PWD}/database/postgrest.conf:/etc/postgrest/postgrest.conf:ro
     
