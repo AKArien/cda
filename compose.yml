@@ -8,10 +8,11 @@ services:
    
     environment:
       POSTGRES_PASSWORD: ${DB_PASS}
+      SOURCE_DIR: /src
 
     volumes:
       - ${PWD}/database:/src
-      - ${PWD}/database/scripts/fist-time-setup.sql:/docker-entrypoint-initdb.d/first-time-setup.sql:ro
+      - ${PWD}/database/migrations/000-setup.sql:/docker-entrypoint-initdb.d/000-setup.sql:ro
       # - postgres-data:/var/lib/postgresql/data
       - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
 
@@ -30,7 +31,7 @@ services:
     volumes:
       - ${PWD}/database/postgrest.conf:/etc/postgrest/postgrest.conf:ro
     
-    command: "/etc/postgrest/postgrest.conf"
+    command: ["postgrest", "/etc/postgrest/postgrest.conf"]
 
     depends_on:
       - postgres
