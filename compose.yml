@@ -1,0 +1,47 @@
+services:
+
+  postgres:
+    image: cda-postgres
+    build:
+      context: containerfiles
+      dockerfile: postgres
+   
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+
+    volumes:
+      - ${PWD}/database:/src
+      - ${PWD}/database/scripts/fist-time-setup.sql:/docker-entrypoint-initdb.d/first-time-setup.sql:ro
+      # - postgres-data:/var/lib/postgresql/data
+      - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+
+    networks:
+      - postgres
+
+  postgREST:
+    image: docker.io/postgrest/postgrest:v14.1
+    ports:
+      - 3000:3000
+    environment:
+      PGRST_JWT_SECRET: ${REST_JWT_SECRET}
+    
+    volumes:
+      - ${PWD}/database/postgrest.conf:/etc/postgrest/postgrest.conf:ro
+    
+    command: "/etc/postgrest/postgrest.conf"
+
+    depends_on:
+      - postgres
+
+    networks:
+      - postgres
+
+
+# volumes:
+  # postgres-data:
+
+
+networks:
+  postgres: {}
