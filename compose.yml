@@ -13,7 +13,7 @@ services:
     volumes:
       - ${PWD}/database:/src
       - ${PWD}/database/migrations/000-setup.sql:/docker-entrypoint-initdb.d/000-setup.sql:ro
-      # - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
       - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
 
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
@@ -40,8 +40,8 @@ services:
       - postgres
 
 
-# volumes:
-  # postgres-data:
+volumes:
+  postgres-data:
 
 
 networks:
