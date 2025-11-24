@@ -7,12 +7,14 @@ services:
       dockerfile: postgres
    
     environment:
-      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_PASSWORD: ${DB_PASS_ADMIN}
+      # AUTHENTICATOR_PASSWORD: ${AUTHENTICATOR_PASS}
       SOURCE_DIR: /src
 
     volumes:
-      - ${PWD}/database:/src
-      - ${PWD}/database/migrations/000-setup.sql:/docker-entrypoint-initdb.d/000-setup.sql:ro
+      - ${PWD}/database:/src:ro
+      # - ${PWD}/database/migrations/000-setup.sql:/docker-entrypoint-initdb.d/000-setup.sql:ro
+      - ${PWD}/database/migrations:/docker-entrypoint-initdb.d:ro
       - postgres-data:/var/lib/postgresql/data
       - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
 
@@ -21,15 +23,17 @@ services:
     networks:
       - postgres
 
+
   postgREST:
     image: docker.io/postgrest/postgrest:v14.1
+
     ports:
       - 3000:3000
+
     environment:
       PGRST_JWT_SECRET: ${REST_JWT_SECRET}
-      PGRST_DB_URI: "postgres://postgres:${DB_PASS}@postgres:5432/postgres"
+      PGRST_DB_URI: "postgres://postgres:${DB_PASS_ADMIN}@postgres:5432/cda"
 
-   
     volumes:
       - ${PWD}/database/postgrest.conf:/etc/postgrest/postgrest.conf:ro
     
