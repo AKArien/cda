@@ -13,8 +13,9 @@ services:
 
     volumes:
       - ${PWD}/database:/src:ro
-      # - ${PWD}/database/migrations/000-setup.sql:/docker-entrypoint-initdb.d/000-setup.sql:ro
-      - ${PWD}/database/migrations:/docker-entrypoint-initdb.d:ro
+      # init would already run before timeline because that’s how the alphabet works, but add numbers for absolute clarity
+      - ${PWD}/database/init.sql:/docker-entrypoint-initdb.d/0-init.sql:ro
+      - ${PWD}/database/timeline.sql:/docker-entrypoint-initdb.d/1-timeline.sql:ro
       - postgres-data:/var/lib/postgresql/data
       - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
 
