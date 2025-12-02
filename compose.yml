@@ -4,7 +4,7 @@ services:
     image: cda-postgres
     build:
       context: containerfiles
-      dockerfile: postgres
+      dockerfile: database
    
     environment:
       POSTGRES_PASSWORD: ${DB_PASS_ADMIN}
