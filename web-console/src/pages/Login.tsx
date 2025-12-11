@@ -17,7 +17,7 @@ export default function Login(){
             void navigate("/console")
         }
         catch (e) {
-            setError(e)
+            setError(e as string)
         }
     }
 

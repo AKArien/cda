@@ -1,6 +1,6 @@
 interface RetData {
     token: string
-    session_time: Date
+    session_time: number
 }
 
 export async function login(access: string, pass: string, req_dur = 3600): Promise<Response>{
@@ -24,7 +24,7 @@ export async function login(access: string, pass: string, req_dur = 3600): Promi
 
     if (res.ok){
         const resp = await res.json() as RetData
-        const exp = (new Date(Date.now() + resp.session_time))
+        const exp = (new Date(new Date().getTime() + resp.session_time))
 
         document.cookie =
             "session="

@@ -1,6 +1,6 @@
-import type { access } from "../database-types"
+import type { sites } from "../database-types"
 
-export async function session_access(): Promise<access | null>{
+export async function get_available_sites(): Promise<sites[]>{
     const headers: Headers = new Headers()
     headers.set("Content-Type", "application/json")
     headers.set(
@@ -8,7 +8,7 @@ export async function session_access(): Promise<access | null>{
         + document.cookie.split("; ").find((row) => row.startsWith("session"))?.split("=")[1])
 
     const res = await fetch(
-        "https://localhost:3000/rpc/get_access_data",
+        "https://localhost:3000/sites",
         {
             method: "GET",
             headers: headers,
@@ -16,9 +16,9 @@ export async function session_access(): Promise<access | null>{
     )
 
     if (res.ok){
-        const resp = await res.json() as access
+        const resp = await res.json() as sites[]
         return resp
     }
 
-    return null
+    throw new Error()
 }

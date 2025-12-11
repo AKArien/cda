@@ -1,4 +1,3 @@
-
 interface BaseProps {
   children: React.ReactNode;
 }
@@ -6,6 +5,8 @@ interface BaseProps {
 export default function Base(props: BaseProps) {
   return (
     <>
+    basic bitch
+    {props.children}
     </>
   );
 }
