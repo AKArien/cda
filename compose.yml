@@ -58,7 +58,7 @@ services:
     volumes:
       - ${PWD}/web-console:/src
       - node-modules:/src/node_modules:rw
-      - react-build:/src/build/:rw
+      - react-build:/src/dist/:rw
 
     restart: "no"
 
