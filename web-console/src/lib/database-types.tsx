@@ -22,5 +22,5 @@ export interface access {
 export interface sites {
     name: string
     info: string
-    perimeter: 
+    perimeter: path
 }
