@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install podman
         run: |
@@ -32,7 +32,7 @@ jobs:
 
 
       - name: Build frontend builder
-        run: podman build -f containerfiles/gateway -t cda-web-builder
+        run: podman build -f containerfiles/web-console-builder -t cda-web-builder
 
       - name: Frontend builder artifact
         uses: actions/upload-artifact@v6
