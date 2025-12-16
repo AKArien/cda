@@ -1,0 +1,84 @@
+services:
+
+  postgres:
+    image: cda-postgres
+    build:
+      context: containerfiles
+      dockerfile: database
+   
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS_ADMIN}
+      # AUTHENTICATOR_PASSWORD: ${AUTHENTICATOR_PASS}
+      SOURCE_DIR: /src
+      JWT_SECRET: ${REST_JWT_SECRET}
+
+    volumes:
+      - ${PWD}/database:/src:ro
+      # init, secret and timeline would already run in order because that’s how the alphabet works, but add numbers for clarity
+      - ${PWD}/database/init.sql:/docker-entrypoint-initdb.d/0-init.sql:ro
+      - ${PWD}/database/insert-jwt.sql:/docker-entrypoint-initdb.d/1-insert-jwt-secret.sql:ro
+      - ${PWD}/database/timeline.sql:/docker-entrypoint-initdb.d/2-timeline.sql:ro
+      - postgres-data:/var/lib/postgresql/data:rw
+      - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+
+    networks:
+      - postgres
+
+
+  postgREST:
+    image: docker.io/postgrest/postgrest:v14.1
+
+    ports:
+      - 3000:3000
+
+    environment:
+      PGRST_JWT_SECRET: ${REST_JWT_SECRET}
+      PGRST_DB_URI: "postgres://postgres:${DB_PASS_ADMIN}@postgres:5432/cda"
+
+    volumes:
+      - ${PWD}/database/postgrest.conf:/etc/postgrest/postgrest.conf:ro
+    
+    command: ["postgrest", "/etc/postgrest/postgrest.conf"]
+
+    depends_on:
+      - postgres
+
+    networks:
+      - postgres
+
+
+  web-builder:
+    image: cda-web-builder
+    build:
+      context: containerfiles
+      dockerfile: web-console-builder
+
+    volumes:
+      - ${PWD}/web-console:/src
+      - node-modules:/src/node_modules:rw
+      - react-build:/src/dist/:rw
+
+    restart: "no"
+
+
+  web-console:
+    image: nginx:stable-alpine3.21-perl
+
+    ports:
+      - "4430:443"
+
+    volumes:
+      - react-build:/usr/share/nginx/html:ro
+      - ${PWD}/web-console/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+
+volumes:
+  postgres-data:
+  node-modules:
+  react-build:
+
+
+networks:
+  postgres: {}
