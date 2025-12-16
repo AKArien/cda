@@ -1,0 +1,17 @@
+FROM nixos/nix
+
+RUN nix-channel --update
+
+WORKDIR /
+
+RUN git clone https://github.com/chirpstack/chirpstack.git
+
+WORKDIR /chirpstack
+
+RUN nix-shell
+
+RUN dev-dependencies
+
+RUN make release-amd64
+
+CMD ./chirpstack

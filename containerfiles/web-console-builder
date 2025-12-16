@@ -1,0 +1,7 @@
+FROM node:23-alpine
+
+WORKDIR /src
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+CMD ["sh", "-c", "pnpm install && pnpm run build"]
