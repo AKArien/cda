@@ -1,12 +1,13 @@
-[submodule "cda-web-console"]
-	path = cda-web-console
-	url = https://github.com/AKArien/cda-web-console.git
-[submodule "cda-postgres"]
-	path = cda-postgres
-	url = git@github.com:AKArien/cda-postgres.git
-[submodule "cda-firmware"]
-	path = cda-firmware
-	url = git@github.com:AKArien/cda-firmware.git
-[submodule "cda-gateway"]
-	path = cda-gateway
+
+[submodule "database"]
+	path = database
+	url = git@github.com:AKArien/cda-database.git
+[submodule "gateway"]
+	path = gateway
 	url = git@github.com:AKArien/cda-gateway.git
+[submodule "web-console"]
+	path = web-console
+	url = git@github.com:AKArien/cda-web-console.git
+[submodule "firmware"]
+	path = firmware
+	url = git@github.com:AKArien/cda-firmware.git
