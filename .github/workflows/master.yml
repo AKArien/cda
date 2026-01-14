@@ -12,12 +12,12 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Login to docker hub
-        run: podman login -u "$username" -p "$password"
+        run: podman login docker.io -u "$username" -p "$password"
         env:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-          
+
       - name: Build database
         run: podman build -f containerfiles/database -t cda-postgres
 
