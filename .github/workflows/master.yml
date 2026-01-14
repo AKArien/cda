@@ -11,35 +11,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Install podman
-        run: |
-          sudo apt-get update
-          sudo apt-get install podman
+      - name: Login to docker hub
+        run: podman login -u "$username" -p "$password"
+        env:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-
+          
       - name: Build database
         run: podman build -f containerfiles/database -t cda-postgres
 
-      - name: Database artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: db-image
-          path: ~/.local/share/containers/${podman images \
-                                              --format='{{.Names}} {{.Id}}' | \
-                                              grep cda-postgres | \
-                                              awk '{ print $2 }'}
-                                          }
+      - name: Upload database to docker hub
+        run: podman push cda-postgres https://hub.docker.com/akarien/cda:postgres
 
 
       - name: Build frontend builder
         run: podman build -f containerfiles/web-console-builder -t cda-web-builder
 
-      - name: Frontend builder artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: db-image
-          path: ~/.local/share/containers/${podman images \
-                                              --format='{{.Names}} {{.Id}}' | \
-                                              grep cda-web-builder | \
-                                              awk '{ print $2 }' \
-                                          }
+      - name: Upload frontend builder to docker hub
+        run: podman push cda-web-builder https://hub.docker.com/akarien/cda:web-builder
