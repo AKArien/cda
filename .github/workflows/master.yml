@@ -22,11 +22,11 @@ jobs:
         run: podman build -f containerfiles/database -t cda-postgres
 
       - name: Upload database to docker hub
-        run: podman push cda-postgres https://hub.docker.com/akarien/cda:postgres
+        run: podman push cda-postgres docker.io/akarien/cda:postgres
 
 
       - name: Build frontend builder
         run: podman build -f containerfiles/web-console-builder -t cda-web-builder
 
       - name: Upload frontend builder to docker hub
-        run: podman push cda-web-builder https://hub.docker.com/akarien/cda:web-builder
+        run: podman push cda-web-builder docker.io/akarien/cda:web-builder
