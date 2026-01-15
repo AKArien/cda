@@ -1,11 +1,13 @@
-name: CI
+name: Build and publish container images
 on:
   push:
     branches:
       - master
+    paths:
+      - containerfiles/*
 
 jobs:
-  container_images:
+  run:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
