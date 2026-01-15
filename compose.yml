@@ -8,9 +8,10 @@ services:
    
     environment:
       POSTGRES_PASSWORD: ${DB_PASS_ADMIN}
-      # AUTHENTICATOR_PASSWORD: ${AUTHENTICATOR_PASS}
       SOURCE_DIR: /src
       JWT_SECRET: ${REST_JWT_SECRET}
+      ACCOUNT_ZERO_NAME: ${ACCOUNT_ZERO_NAME}
+      ACCOUNT_ZERO_PASS: ${ACCOUNT_ZERO_PASS}
 
     volumes:
       - ${PWD}/database:/src:ro
@@ -18,6 +19,7 @@ services:
       - ${PWD}/database/init.sql:/docker-entrypoint-initdb.d/0-init.sql:ro
       - ${PWD}/database/insert-jwt.sql:/docker-entrypoint-initdb.d/1-insert-jwt-secret.sql:ro
       - ${PWD}/database/timeline.sql:/docker-entrypoint-initdb.d/2-timeline.sql:ro
+      - ${PWD}/database/create-account-zero.sql:/docker-entrypoint-initdb.d/3-create-account-zero.sql:ro
       - postgres-data:/var/lib/postgresql/data:rw
       - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
 
