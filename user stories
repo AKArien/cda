@@ -12,9 +12,58 @@ As a member of human resources, i need to be able to manage teams of people,
 wether incoming or outgoing, with a system intuitive enough that i do not
 need a full blown formation on how to use the tools and it’s principles.
 
+As a safety officer, I need to monitor the density of people within specific
+zones in real-time, so I can ensure safety regulations are followed and react
+promptly to overcrowded areas.
 
+As a city planner, I need to track and visualize traffic and pedestrian flow
+patterns over time, so I can identify bottlenecks and propose infrastructure
+improvements.
 
-l’analyste data, seul ou en équipe, se connecte au site avec un compte donné par son responsable. Il peut visualiser les données à travers le temps sous différentes formes : sur une carte et en graphe, ainsi qu’une forme plus brute des données.
+As a retail manager, I need access to foot traffic data around my store’s
+perimeter and areas leading to it, so I can optimize store placement, staff
+allocation, and marketing campaigns.
 
-le manager donne accès aux données à ceux qui doivent y avoir accès. Il se connecte avec le compte donné par l’admin de l’entreprise, crée des accès et leur donne les permissions nécessaires.
+As a facilities manager, I need real-time alerts about unusually high or low
+movement in monitored areas, so I can quickly dispatch resources to investigate
+and address any irregularities.
 
+As an event organizer, I need to see live data on how attendees are moving
+between event zones, so I can dynamically manage crowd flow and adjust
+entrances or pathways to ensure a smooth event experience.
+
+As an operations manager, I need to measure and compare footfall between key
+areas of my business premises over weeks or months, so I can evaluate which
+areas contribute most to efficiency and revenue generation.
+
+As a security officer, I need to identify non-typical movement patterns
+overnight or in restricted areas, so I can address potential risks such as
+trespassing or theft.
+
+As a logistics coordinator, I need an analysis of movement within our
+distribution hubs to find unnecessary stagnation points, so I can optimize
+the flow of goods and workers to save time and reduce costs.
+
+As a marketing analyst, I need to view heatmaps of high-traffic zones during
+specific times or events, so I can better target ad placements and promotional
+activities for maximum visibility.
+
+As an auditor, I need access to an immutable log of movement records, segmented
+by time and location, so I can investigate security breaches and reconstruct
+incident timelines.
+
+As a transportation authority, I need aggregate data on movement trends through
+public transport stations, so I can optimize transit schedules and reduce wait
+times during peak operations.
+
+As a sustainability consultant, I need to correlate movement data with
+environmental factors such as energy usage or emissions, so I can make
+recommendations toward more sustainable practices within the territory.
+
+As a business intelligence analyst, I need tools to predict future movement
+patterns based on historical data, so I can propose strategic changes to
+improve the organisation’s long-term efficiency.
+
+As an NGO worker or community manager, I need to study patterns of movement in
+under-served zones, so I can understand community needs and advocate for better
+resource allocation.
