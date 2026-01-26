@@ -2,3 +2,19 @@ As the designated administrator, i need to be able to give an access to other
 people of my organisation the needed rights and no more,with no possible
 confusion, so i need an interface that does not obfuscate what i am doing
 and still allows for quick action.
+
+As a data analyst, i need to be able to formulating my ideas fast, so i need
+graphs with relevant data out of the box. I also need to be able to examine
+data in detail, so i need to be able to consult and export the raw data to
+analyse it in another tool.
+
+As a member of human resources, i need to be able to manage teams of people,
+wether incoming or outgoing, with a system intuitive enough that i do not
+need a full blown formation on how to use the tools and it’s principles.
+
+
+
+l’analyste data, seul ou en équipe, se connecte au site avec un compte donné par son responsable. Il peut visualiser les données à travers le temps sous différentes formes : sur une carte et en graphe, ainsi qu’une forme plus brute des données.
+
+le manager donne accès aux données à ceux qui doivent y avoir accès. Il se connecte avec le compte donné par l’admin de l’entreprise, crée des accès et leur donne les permissions nécessaires.
+
