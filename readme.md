@@ -19,3 +19,45 @@ For a quick presentation of each of them :
 - firmware : Contains the source code and files necessary for hardware construction of the micro-controllers that gather the data on premises.
 - gateway : Contains the source code for communication between the micro-controllers and the main server.
 - web-console : Contains the source code for the website through which a deployment is accessed and the data is consulted.
+
+## Running
+
+Clone this repository and the `database` and `web-console` submodules.
+
+```bash
+git clone https://github.com/AKArien/cda.git
+git submodule update --init --recursive database
+git submodule update --init web-console
+```
+
+For physical setup, follow the intructions specific to [the gateway setup](https://github.com/AKArien/cda-gateway/tree/main) and [the watchers setup](https://github.com/AKArien/cda-firmware/tree/main).
+
+If you just want to see numbers flashing on your screen, you can instead run [the faker script]().
+
+To start the backend and serve the frontend, populate your environment. There is an example in .env.example :
+
+```
+DB_PASS_ADMIN=very_secure_password # The password to the `postgres` user
+REST_JWT_SECRET=remember_to_use_this_in_prod_this_is_important # The JWT secret to be used by postgREST for signing authentication
+# « Account 0 » is a sort of admin, that has every right to the entities in the database. Used for granting initial accesses to others on their domains.
+ACCOUNT_ZERO_NAME=admin
+ACCOUNT_ZERO_PASS=omnipotent
+```
+
+run the compose (here with podman, but should run fine with docker as well) :
+
+```bash
+podman compose up
+```
+
+This will set up and launch everything. Once running, to apply database migrations, run `timeline.sql`. As per the within the container :
+
+```bash
+psql -U postgres -a -f /src/timeline.sql
+```
+
+To refresh the frontend, restart the `web-builder` container, which will build the frontend bundle for the web server :
+
+```bash
+docker-compose start web-builder
+```
