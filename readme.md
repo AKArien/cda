@@ -44,20 +44,14 @@ ACCOUNT_ZERO_NAME=admin
 ACCOUNT_ZERO_PASS=omnipotent
 ```
 
-run the compose (here with podman, but should run fine with docker as well) :
+Run the compose (here with podman, but should run fine with docker as well) :
 
 ```bash
-podman compose up
-```
-
-This will set up and launch everything. Once running, to apply database migrations, run `timeline.sql`. As per the within the container :
-
-```bash
-psql -U postgres -a -f /src/timeline.sql
+podman-compose up
 ```
 
 To refresh the frontend, restart the `web-builder` container, which will build the frontend bundle for the web server :
 
 ```bash
-docker-compose start web-builder
+podman-compose start web-builder
 ```
