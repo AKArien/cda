@@ -19,7 +19,7 @@ services:
       - ${PWD}/database/init.sql:/docker-entrypoint-initdb.d/0-init.sql:ro
       - ${PWD}/database/insert-jwt.sql:/docker-entrypoint-initdb.d/1-insert-jwt-secret.sql:ro
       - ${PWD}/database/timeline.sql:/docker-entrypoint-initdb.d/2-timeline.sql:ro
-      - ${PWD}/database/create-account-zero.sql:/docker-entrypoint-initdb.d/3-create-account-zero.sql:ro
+      - ${PWD}/database/create-account-0.sql:/docker-entrypoint-initdb.d/3-create-account-0.sql:ro
       - postgres-data:/var/lib/postgresql/data:rw
       - ${PWD}/database/postgresql.conf:/etc/postgresql/postgresql.conf:ro
 
