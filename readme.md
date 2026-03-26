@@ -1,4 +1,4 @@
-# cda (backronym pending)
+# Crowd Data Aggregation
 
 ## Goals and use
 
