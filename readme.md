@@ -30,10 +30,6 @@ git submodule update --init --recursive database
 git submodule update --init web-console
 ```
 
-For physical setup, follow the intructions specific to [the gateway setup](https://github.com/AKArien/cda-gateway/tree/main) and [the watchers setup](https://github.com/AKArien/cda-firmware/tree/main).
-
-If you just want to see numbers flashing on your screen, you can instead run [the faker script]().
-
 To start the backend and serve the frontend, populate your environment. There is an example in .env.example :
 
 ```
@@ -42,7 +38,20 @@ REST_JWT_SECRET=remember_to_use_this_in_prod_this_is_important # The JWT secret 
 # « Account 0 » is a sort of admin, that has every right to the entities in the database. Used for granting initial accesses to others on their domains.
 ACCOUNT_ZERO_NAME=admin
 ACCOUNT_ZERO_PASS=omnipotent
+# The common name of the api server
+SERVER_CN=cda.local
 ```
+
+Generate the tls certificates :
+
+```bash
+./scripts/tls/gen-root-ca.sh
+./scripts/tls/gen-certs.sh gw-hq-01 gw-hq-02
+```
+
+UNIMPLEMENTED : For physical setup, follow the intructions specific to [the gateway setup](https://github.com/AKArien/cda-gateway/tree/main) and [the watchers setup](https://github.com/AKArien/cda-firmware/tree/main).
+
+If you just want to see numbers flashing on your screen, you can instead run [the faker script]().
 
 Run the compose (here with podman, but should run fine with docker as well) :
 
